@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/food-tracker',
+    connection: 'postgres://localhost/foods_tracker',
     migrations: {
       directory: './db/migrations'
     },
