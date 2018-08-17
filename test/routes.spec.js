@@ -1,7 +1,10 @@
+process.env.NODE_ENV = 'test';
+
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
 const server = require('../server');
+var knex = require('../db/knex');
 
 chai.use(chaiHttp);
 
@@ -29,7 +32,7 @@ describe('Client Routes', () => {
 
 describe('API Routes', () => {
   before((done) => {
-    database.migrate.latest()
+    knex.migrate.latest()
     .then(() => done())
     .catch(error => {
       throw error;
@@ -37,7 +40,7 @@ describe('API Routes', () => {
   });
 
   beforeEach((done) => {
-    database.seed.run()
+    knex.seed.run()
     .then(() => done())
     .catch(error => {
       throw error;
