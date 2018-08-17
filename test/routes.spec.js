@@ -48,7 +48,7 @@ describe('API Routes', () => {
   });
 
   describe('GET /api/v1/foods', () => {
-    it('should return all of the foods', done => {
+    it('should return all of the foods if database contains foods', done => {
       chai.request(server)
       .get('/api/v1/foods')
       .end((err, response) => {
@@ -64,6 +64,17 @@ describe('API Routes', () => {
         response.body[0].calories.should.equal(60);
         response.body[0].should.not.have.property('created_at');
         response.body[0].should.not.have.property('updated_at');
+        done();
+      });
+    });
+  });
+
+  describe('GET /api/v1/foods', () => {
+    it('should return 404 response if database does not contain foods', done => {
+      chai.request(server)
+      .get('/api/v1/foods')
+      .end((err, response) => {
+        response.should.have.status(404);
         done();
       });
     });
