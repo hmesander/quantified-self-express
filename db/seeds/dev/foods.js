@@ -10,6 +10,7 @@ exports.seed = function(knex, Promise) {
       {id: 5, name: 'Margarita', calories: 220}
     ])
   })
-  .then(() => console.log('Seeding foods complete!'))
   .catch(error => console.log(`Error seeding foods: ${error}`))
+
+  // knex.raw(SELECT setval(pg_get_serial_sequence('foods', 'id'), max(id)) FROM tbl);
 };
