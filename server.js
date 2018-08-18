@@ -98,7 +98,11 @@ app.patch('/api/v1/foods/:id', (request, response) => {
 app.get('/api/v1/meals', (request, response) => {
   database('meals').select('id', 'name')
   .then((meals) => {
-    response.status(200).json(meals)
+    if (meals.length == 0) {
+      response.status(404).json();
+    } else {
+      response.status(200).json(meals);
+    }
   })
   .catch(error => {
     response.status(500).json({ error });

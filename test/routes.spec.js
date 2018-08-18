@@ -215,6 +215,14 @@ describe('API Routes Empty Database', () => {
     });
   });
 
+  before((done) => {
+    knex('meals').del()
+    .then(() => done())
+    .catch(error => {
+      throw error;
+    });
+  });
+
   describe('GET /api/v1/foods', () => {
     it('should return 404 response if database does not contain foods', done => {
       chai.request(server)
