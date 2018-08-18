@@ -239,24 +239,24 @@ describe('API Routes', () => {
         response.body.message.should.equal('Successfully added Banana to Lunch');
         done();
       });
+    });
 
-      it('should return a 200 response and message if meal-food was deleted', done => {
-        chai.request(server)
-        .delete('/api/v1/meals/3/foods/1')
-        .end((err, response) => {
-          response.should.have.status(200);
-          response.body.message.should.equal('Successfully removed Banana from Lunch');
-          done();
-        });
+    it('should return a 200 response and message if meal-food was deleted', done => {
+      chai.request(server)
+      .delete('/api/v1/meals/3/foods/1')
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.body.message.should.equal('Successfully removed Banana from Lunch');
+        done();
       });
+    });
 
-      it('should return a 404 response if meal or food could not be found', done => {
-        chai.request(server)
-        .delete('/api/v1/meals/5/foods/1')
-        .end((err, response) => {
-          response.should.have.status(404);
-          done();
-        });
+    it('should return a 404 response if meal or food could not be found', done => {
+      chai.request(server)
+      .delete('/api/v1/meals/5/foods/1')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
       });
     });
   });

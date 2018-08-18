@@ -141,18 +141,18 @@ app.post('/api/v1/meals/:meal_id/foods/:id', (request, response) => {
 
 app.delete('/api/v1/meals/:meal_id/foods/:id', (request, response) => {
   database('meal-foods').where({ food_id: request.params.id, meal_id: request.params.meal_id }).select('id', 'meal_id', 'food_id')
-  .then((meal_food))
-    console.log(meal_food)
-    database('meal-foods').where({ food_id: request.params.id, meal_id: request.params.meal_id }).select('meal_id', 'food_id').del()
+  .then((meal_food) => {
+    database('meal-foods').where({ food_id: meal_food[0].food_id, meal_id: meal_food[0].meal_id }).select('meal_id', 'food_id').del()
     .then(() => {
-      database('meals').where('id', ids[0].meal_id).select('name')
+      database('meals').where('id', meal_food[0].meal_id).select('name')
       .then((meal_name) => {
-        database('foods').where('id', ids[0].food_id).select('name')
+        database('foods').where('id', meal_food[0].food_id).select('name')
         .then((food_name) => {
-          response.status(201).json({ message: `Successfully removed ${food_name[0].name} from ${meal_name[0].name}` });
+          response.status(200).json({ message: `Successfully removed ${food_name[0].name} from ${meal_name[0].name}` });
         })
       })
     })
+  })
   .catch(error => {
     response.status(404).json({ error });
   });
