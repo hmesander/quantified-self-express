@@ -152,6 +152,28 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('PATCH /api/v1/foods/:id', () => {
+    it('should update food when required parameters exist', done => {
+      chai.request(server)
+      .patch('/api/v1/foods/:id')
+      .send({
+        "food": {
+          "name": "Pho",
+          "calories": 200
+        }
+      })
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.body.should.be.a('object');
+        response.body.name.should.equal('Pho');
+        response.body.calories.should.equal(200);
+        response.body.should.not.have.property('created_at');
+        response.body.should.not.have.property('updated_at');
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
