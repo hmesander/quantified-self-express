@@ -225,4 +225,15 @@ describe('API Routes Empty Database', () => {
       });
     });
   });
+
+  describe('GET /api/v1/meals', () => {
+    it('should return 404 response if database does not contain meals', done => {
+      chai.request(server)
+      .get('/api/v1/meals')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+  });
 })
