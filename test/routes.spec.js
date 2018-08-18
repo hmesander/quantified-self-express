@@ -229,6 +229,18 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('POST /api/v1/meals/:meal_id/foods/:id', () => {
+    it('should return a 201 response and message if meal-food was created successfully', done => {
+      chai.request(server)
+      .post('/api/v1/meals/1/foods/1')
+      .end((err, response) => {
+        response.should.have.status(201);
+        response.should.have.message('Successfully added Banana to Breakfast');
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
