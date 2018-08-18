@@ -219,6 +219,15 @@ describe('API Routes', () => {
         done();
       });
     });
+
+    it('should return a 404 response if meal is not found in database', done => {
+      chai.request(server)
+      .get('/api/v1/meals/5/foods')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
   });
 });
 
