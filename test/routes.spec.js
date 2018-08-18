@@ -68,6 +68,25 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('GET /api/v1/foods/:id', () => {
+    it('should return a single food if food is found in database', done => {
+      chai.request(server)
+      .get('/api/v1/foods/1')
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].id.should.equal(1);
+        response.body[0].name.should.equal('Banana');
+        response.body[0].calories.should.equal(60);
+        response.body[0].should.not.have.property('created_at');
+        response.body[0].should.not.have.property('updated_at');
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
