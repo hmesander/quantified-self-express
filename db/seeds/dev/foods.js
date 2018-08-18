@@ -10,6 +10,5 @@ exports.seed = function(knex, Promise) {
       {id: 5, name: 'Margarita', calories: 220}
     ])
   })
-  .then(() => console.log('Seeding foods complete!'))
   .catch(error => console.log(`Error seeding foods: ${error}`))
 };

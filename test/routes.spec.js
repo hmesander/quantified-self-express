@@ -109,13 +109,11 @@ describe('API Routes', () => {
       })
       .end((err, response) => {
         response.should.have.status(201);
-        response.body.should.be.a('array');
-        response.body.length.should.equal(1);
-        response.body[0].id.should.equal(3);
-        response.body[0].name.should.equal('Pho');
-        response.body[0].calories.should.equal(300);
-        response.body[0].should.not.have.property('created_at');
-        response.body[0].should.not.have.property('updated_at');
+        response.body.should.be.a('object');
+        response.body.name.should.equal('Pho');
+        response.body.calories.should.equal(300);
+        response.body.should.not.have.property('created_at');
+        response.body.should.not.have.property('updated_at');
         done();
       });
     });
