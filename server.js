@@ -15,6 +15,17 @@ app.get('/', (request, response) => {
   response.send('Welcome to the Quantified Self - Express API!');
 });
 
+app.get('/api/v1/foods', (request, response) => {
+  database('foods').select('id', 'name', 'calories')
+  .then((foods) => {
+    if (foods.length == 0) {
+      response.status(404).json();
+    } else {
+      response.status(200).json(foods);
+    }
+  })
+});
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
