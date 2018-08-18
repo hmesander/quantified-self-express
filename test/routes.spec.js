@@ -68,6 +68,16 @@ describe('API Routes', () => {
       });
     });
   });
+});
+
+describe('API Routes Empty Database', () => {
+  before((done) => {
+    knex('foods').del()
+    .then(() => done())
+    .catch(error => {
+      throw error;
+    });
+  });
 
   describe('GET /api/v1/foods', () => {
     it('should return 404 response if database does not contain foods', done => {
@@ -79,4 +89,4 @@ describe('API Routes', () => {
       });
     });
   });
-});
+})

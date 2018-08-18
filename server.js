@@ -18,7 +18,11 @@ app.get('/', (request, response) => {
 app.get('/api/v1/foods', (request, response) => {
   database('foods').select('id', 'name', 'calories')
   .then((foods) => {
-    response.status(200).json(foods);
+    if (foods.length == 0) {
+      response.status(404).json();
+    } else {
+      response.status(200).json(foods);
+    }
   })
 });
 
