@@ -11,4 +11,6 @@ exports.seed = function(knex, Promise) {
     ])
   })
   .catch(error => console.log(`Error seeding foods: ${error}`))
+
+  // knex.raw(SELECT setval(pg_get_serial_sequence('foods', 'id'), max(id)) FROM tbl);
 };
