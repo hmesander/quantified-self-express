@@ -102,9 +102,9 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/api/v1/foods')
       .send({
-        "food": {
-          "name": "Pho",
-          "calories": 300
+        'food': {
+          'name': 'Pho',
+          'calories': 300
         }
       })
       .end((err, response) => {
@@ -122,8 +122,8 @@ describe('API Routes', () => {
       chai.request(server)
       .post('/api/v1/foods')
       .send({
-        "food": {
-          "name": "Pho" //calories field is not given
+        'food': {
+          'name': 'Pho' //calories field is not given
         }
       })
       .end((err, response) => {
@@ -158,9 +158,9 @@ describe('API Routes', () => {
       chai.request(server)
       .patch('/api/v1/foods/1')
       .send({
-        "food": {
-          "name": "Pho",
-          "calories": 200
+        'food': {
+          'name': 'Pho',
+          'calories': 200
         }
       })
       .end((err, response) => {
@@ -178,8 +178,8 @@ describe('API Routes', () => {
       chai.request(server)
       .patch('/api/v1/foods/100')
       .send({
-        "food": {
-          "name": "Pho"
+        'food': {
+          'name': 'Pho'
         }
       })
       .end((err, response) => {
@@ -188,6 +188,22 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('GET /api/v1/meals', () => {
+    it('should return all meals in the database', (done) => {
+      chai.request(server)
+      .get('/api/v1/meals')
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.body.length.should.equal(4);
+        response.body[0].name.should.equal('Breakfast');
+        response.body[1].name.should.equal('Snack');
+        response.body[2].name.should.equal('Lunch');
+        response.body[3].name.should.equal('Dinner');
+        done();
+      })
+    })
+  })
 });
 
 describe('API Routes Empty Database', () => {
@@ -199,10 +215,29 @@ describe('API Routes Empty Database', () => {
     });
   });
 
+  before((done) => {
+    knex('meals').del()
+    .then(() => done())
+    .catch(error => {
+      throw error;
+    });
+  });
+
   describe('GET /api/v1/foods', () => {
     it('should return 404 response if database does not contain foods', done => {
       chai.request(server)
       .get('/api/v1/foods')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+  });
+
+  describe('GET /api/v1/meals', () => {
+    it('should return 404 response if database does not contain meals', done => {
+      chai.request(server)
+      .get('/api/v1/meals')
       .end((err, response) => {
         response.should.have.status(404);
         done();
