@@ -241,14 +241,6 @@ describe('API Routes', () => {
       });
     });
 
-    it('should return a 404 status when meal or food do not exist', done => {
-      chai.request(server)
-      .post('/api/v1/meals/5/foods/2')
-      .end((err, response) => {
-        response.should.have.status(404);
-        done();
-      });
-    });
   });
 });
 
@@ -292,6 +284,17 @@ describe('API Routes Empty Database', () => {
     it('should return 404 response if database does not contain meals', done => {
       chai.request(server)
       .get('/api/v1/meals')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+  });
+
+  describe('POST /api/v1/meals/:meal_id/foods/:id', () => {
+    it('should return a 404 status when meal or food do not exist', done => {
+      chai.request(server)
+      .post('/api/v1/meals/1/foods/1')
       .end((err, response) => {
         response.should.have.status(404);
         done();

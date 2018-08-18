@@ -135,7 +135,7 @@ app.post('/api/v1/meals/:meal_id/foods/:id', (request, response) => {
     })
   })
   .catch(error => {
-    response.status(500).json({ error });
+    response.status(404).json({ error });
   });
 })
 
