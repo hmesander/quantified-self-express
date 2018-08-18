@@ -132,6 +132,26 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('DELETE /api/v1/foods/:id', () => {
+    it('should delete a food with given id if food exists in database', done => {
+      chai.request(server)
+      .delete('/api/v1/foods/1')
+      .end((err, response) => {
+        response.should.have.status(204);
+        done();
+      });
+    });
+
+    it('should return 404 status if food to be deleted does not exist', done => {
+      chai.request(server)
+      .delete('/api/v1/foods/100')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
