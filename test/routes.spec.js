@@ -204,6 +204,24 @@ describe('API Routes', () => {
       })
     })
   })
+
+  describe('GET /api/v1/meals/:id/foods', () => {
+    it('should return a single meal with associated foods if meal is found in database', done => {
+      chai.request(server)
+      .get('/api/v1/meals/1/foods')
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].id.should.equal(1);
+        response.body[0].name.should.equal('Breakfast');
+        response.body[0].foods[0].name.equal('Banana');
+        response.body[0].foods[1].name.equal('Oatmeal');
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
