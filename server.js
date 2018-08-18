@@ -40,6 +40,13 @@ app.get('/api/v1/foods/:id', (request, response) => {
 app.post('/api/v1/foods', (request, response) => {
   const food = request.body.food;
 
+  for (let requiredParameter of ['name', 'calories']) {
+    if (!food[requiredParameter]) {
+      return response
+        .status(400).json()
+    }
+  }
+
   database('foods').insert(food, 'id')
   .then((id) => {
     database('foods').where('id', id[0]).select('id', 'name', 'calories')

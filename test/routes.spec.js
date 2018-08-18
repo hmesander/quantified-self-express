@@ -98,7 +98,7 @@ describe('API Routes', () => {
   });
 
   describe('POST /api/v1/foods', () => {
-    it('should create a new food', done => {
+    it('should create a new food when required parameters exist', done => {
       chai.request(server)
       .post('/api/v1/foods')
       .send({
@@ -114,6 +114,20 @@ describe('API Routes', () => {
         response.body.calories.should.equal(300);
         response.body.should.not.have.property('created_at');
         response.body.should.not.have.property('updated_at');
+        done();
+      });
+    });
+
+    it('should return a 400 status when required parameters do not exist', done => {
+      chai.request(server)
+      .post('/api/v1/foods')
+      .send({
+        "food": {
+          "name": "Pho" //calories field is not given
+        }
+      })
+      .end((err, response) => {
+        response.should.have.status(400);
         done();
       });
     });
