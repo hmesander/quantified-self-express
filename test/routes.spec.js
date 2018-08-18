@@ -249,6 +249,15 @@ describe('API Routes', () => {
           done();
         });
       });
+
+      it('should return a 404 response if meal or food could not be found', done => {
+        chai.request(server)
+        .delete('/api/v1/meals/5/foods/1')
+        .end((err, response) => {
+          response.should.have.status(404);
+          done();
+        });
+      });
     });
   });
 });
