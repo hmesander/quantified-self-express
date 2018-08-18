@@ -74,6 +74,21 @@ app.delete('/api/v1/foods/:id', (request, response) => {
   });
 });
 
+app.patch('/api/v1/foods/:id', (request, response) => {
+  const food = request.body.food;
+
+  database('foods').where({ id: request.params.id }).update(food, 'id')
+  .then((id) => {
+    database('foods').where('id', id[0]).select('id', 'name', 'calories')
+    .then((new_food) => {
+      response.status(200).json(new_food)
+    })
+  })
+  .catch(error => {
+    response.status(404).json({ error });
+  });
+});
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });

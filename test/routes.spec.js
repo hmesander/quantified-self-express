@@ -156,7 +156,7 @@ describe('API Routes', () => {
   describe('PATCH /api/v1/foods/:id', () => {
     it('should update food when required parameters exist', done => {
       chai.request(server)
-      .patch('/api/v1/foods/:id')
+      .patch('/api/v1/foods/1')
       .send({
         "food": {
           "name": "Pho",
@@ -165,11 +165,11 @@ describe('API Routes', () => {
       })
       .end((err, response) => {
         response.should.have.status(200);
-        response.body.should.be.a('object');
-        response.body.name.should.equal('Pho');
-        response.body.calories.should.equal(200);
-        response.body.should.not.have.property('created_at');
-        response.body.should.not.have.property('updated_at');
+        response.body[0].should.be.a('object');
+        response.body[0].name.should.equal('Pho');
+        response.body[0].calories.should.equal(200);
+        response.body[0].should.not.have.property('created_at');
+        response.body[0].should.not.have.property('updated_at');
         done();
       });
     });
