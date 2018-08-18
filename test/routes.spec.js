@@ -96,6 +96,30 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('POST /api/v1/foods', () => {
+    it('should create a new food', done => {
+      chai.request(server)
+      .post('/api/v1/foods')
+      .send({
+        "food": {
+          "name": "Pho",
+          "calories": 300
+        }
+      })
+      .end((err, response) => {
+        response.should.have.status(201);
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].id.should.equal(3);
+        response.body[0].name.should.equal('Pho');
+        response.body[0].calories.should.equal(300);
+        response.body[0].should.not.have.property('created_at');
+        response.body[0].should.not.have.property('updated_at');
+        done();
+      });
+    });
+  });
 });
 
 describe('API Routes Empty Database', () => {
