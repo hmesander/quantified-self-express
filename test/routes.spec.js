@@ -188,6 +188,23 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe("GET /api/v1/meals", () => {
+    it('returns all meals in the database', (done) => {
+      chai.request(app)
+      .get('/api/v1/meals')
+      .end((err, response) => {
+        expect(err).to.be.null;
+        expect(response).to.have.status(200);
+        expect(response.body.length).to.eql(4);
+        expect(response.body[0].name).to.eq("Breakfast");
+        expect(response.body[1].name).to.eq("Snack");
+        expect(response.body[2].name).to.eq("Lunch");
+        expect(response.body[3].name).to.eq("Dinner");
+        done();
+      })
+    })
+  })
 });
 
 describe('API Routes Empty Database', () => {
