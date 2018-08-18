@@ -109,6 +109,13 @@ app.get('/api/v1/meals', (request, response) => {
   });
 });
 
+app.get('/api/v1/meals/:id/foods', (request, response) => {
+  database('meals').where('id', request.params.id).select('id', 'name')
+  .then((meal) => {
+    response.status(200).json(meal);
+  })
+})
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });

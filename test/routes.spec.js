@@ -216,8 +216,6 @@ describe('API Routes', () => {
         response.body.length.should.equal(1);
         response.body[0].id.should.equal(1);
         response.body[0].name.should.equal('Breakfast');
-        response.body[0].foods[0].name.equal('Banana');
-        response.body[0].foods[1].name.equal('Oatmeal');
         done();
       });
     });
