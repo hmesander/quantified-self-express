@@ -120,6 +120,25 @@ app.get('/api/v1/meals/:id/foods', (request, response) => {
   })
 })
 
+app.post('/api/v1/meals/:meal_id/foods/:id', (request, response) => {
+  database('meal-foods').insert({ food_id: request.params.id, meal_id: request.params.meal_id }, 'id')
+  .then((id) => {
+    database('meal-foods').where('id', id[0]).select('meal_id', 'food_id')
+    .then((ids) => {
+      database('meals').where('id', ids[0].meal_id).select('name')
+      .then((meal_name) => {
+        database('foods').where('id', ids[0].food_id).select('name')
+        .then((food_name) => {
+          response.status(201).json({ message: `Successfully added ${food_name[0].name} to ${meal_name[0].name}` });
+        })
+      })
+    })
+  })
+  .catch(error => {
+    response.status(404).json({ error });
+  });
+})
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });

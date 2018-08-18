@@ -229,9 +229,30 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('POST /api/v1/meals/:meal_id/foods/:id', () => {
+    it('should return a 201 response and message if meal-food was created successfully', done => {
+      chai.request(server)
+      .post('/api/v1/meals/3/foods/1')
+      .end((err, response) => {
+        response.should.have.status(201);
+        response.body.message.should.equal('Successfully added Banana to Lunch');
+        done();
+      });
+    });
+
+  });
 });
 
 describe('API Routes Empty Database', () => {
+  before((done) => {
+    knex('meal-foods').del()
+    .then(() => done())
+    .catch(error => {
+      throw error;
+    });
+  });
+
   before((done) => {
     knex('foods').del()
     .then(() => done())
@@ -263,6 +284,17 @@ describe('API Routes Empty Database', () => {
     it('should return 404 response if database does not contain meals', done => {
       chai.request(server)
       .get('/api/v1/meals')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+  });
+
+  describe('POST /api/v1/meals/:meal_id/foods/:id', () => {
+    it('should return a 404 status when meal or food do not exist', done => {
+      chai.request(server)
+      .post('/api/v1/meals/1/foods/1')
       .end((err, response) => {
         response.should.have.status(404);
         done();
