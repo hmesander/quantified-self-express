@@ -173,6 +173,20 @@ describe('API Routes', () => {
         done();
       });
     });
+
+    it('should return 404 status if food does not update properly', done => {
+      chai.request(server)
+      .patch('/api/v1/foods/100')
+      .send({
+        "food": {
+          "name": "Pho"
+        }
+      })
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
   });
 });
 
