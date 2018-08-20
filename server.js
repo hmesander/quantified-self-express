@@ -19,28 +19,6 @@ app.get('/', (request, response) => {
 
 app.use('/api/v1/foods', foodsRouter);
 
-app.post('/api/v1/foods', (request, response) => {
-  const food = request.body.food;
-
-  for (let requiredParameter of ['name', 'calories']) {
-    if (!food[requiredParameter]) {
-      return response
-        .status(400).json()
-    }
-  }
-
-  database('foods').insert(food, 'id')
-  .then((id) => {
-    database('foods').where('id', id[0]).select('id', 'name', 'calories')
-    .then((food) => {
-      response.status(201).json(food[0])
-    })
-  })
-  .catch(error => {
-    response.status(500).json({ error });
-  });
-});
-
 app.delete('/api/v1/foods/:id', (request, response) => {
   const id = request.params.id
 

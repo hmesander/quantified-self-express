@@ -22,6 +22,21 @@ class FoodsController {
       }
     });
   }
+
+  static create(request, response, next) {
+    const food = request.body.food;
+
+    for (let requiredParameter of ['name', 'calories']) {
+      if (!food[requiredParameter]) {
+        return response
+          .status(400).json()
+      }
+    }
+
+    Food.create(food.name, food.calories)
+    .then(food => Food.find(food[0]))
+    .then(food => response.status(201).json(food[0]));
+  }
 }
 
 module.exports = FoodsController;
