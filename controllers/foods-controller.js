@@ -14,8 +14,8 @@ class FoodsController {
 
   static show(request, response, next) {
     let food = Food.find(request.params.id)
-    .then(food => {
-      if (food) {
+    .then((food) => {
+      if (food[0]) {
         response.status(200).json(food);
       } else {
         response.status(404).json();
