@@ -32,22 +32,6 @@
 //
 // describe('API Routes', () =>
 //
-//   describe('GET /api/v1/meals', () => {
-//     it('should return all meals in the database', (done) => {
-//       chai.request(server)
-//       .get('/api/v1/meals')
-//       .end((err, response) => {
-//         response.should.have.status(200);
-//         response.body.length.should.equal(4);
-//         response.body[0].name.should.equal('Breakfast');
-//         response.body[1].name.should.equal('Snack');
-//         response.body[2].name.should.equal('Lunch');
-//         response.body[3].name.should.equal('Dinner');
-//         done();
-//       })
-//     })
-//   })
-//
 //   describe('GET /api/v1/meals/:id/foods', () => {
 //     it('should return a single meal with associated foods if meal is found in database', done => {
 //       chai.request(server)

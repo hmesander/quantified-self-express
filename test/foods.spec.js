@@ -8,7 +8,7 @@ var knex = require('../db/knex');
 
 chai.use(chaiHttp);
 
-describe("API GET Food Endpoints", () => {
+describe('API Food Endpoints', () => {
   beforeEach((done) => {
     knex.migrate.latest()
     .then(() => {

@@ -7,6 +7,7 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
 var foodsRouter = require('./routes/api/v1/foods');
+var mealsRouter = require('./routes/api/v1/meals');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,20 +19,21 @@ app.get('/', (request, response) => {
 });
 
 app.use('/api/v1/foods', foodsRouter);
+app.use('/api/v1/meals', mealsRouter);
 
-app.get('/api/v1/meals', (request, response) => {
-  database('meals').select('id', 'name')
-  .then((meals) => {
-    if (meals.length == 0) {
-      response.status(404).json();
-    } else {
-      response.status(200).json(meals);
-    }
-  })
-  .catch(error => {
-    response.status(500).json({ error });
-  });
-});
+// app.get('/api/v1/meals', (request, response) => {
+//   database('meals').select('id', 'name')
+//   .then((meals) => {
+//     if (meals.length == 0) {
+//       response.status(404).json();
+//     } else {
+//       response.status(200).json(meals);
+//     }
+//   })
+//   .catch(error => {
+//     response.status(500).json({ error });
+//   });
+// });
 
 app.get('/api/v1/meals/:id/foods', (request, response) => {
   database('meals').where('id', request.params.id).select('id', 'name')
