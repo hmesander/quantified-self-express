@@ -48,6 +48,19 @@ class FoodsController {
       }
     })
   }
+
+  static update(request, response, next) {
+    let foodParams = request.body.food
+
+    for (let requiredParameter of ['name', 'calories'])
+      if (!foodParams[requiredParameter]) {
+        return response.status(404).json();
+      }
+
+    Food.update(request.params.id, foodParams.name, foodParams.calories)
+    .then(food => Food.find(food[0]))
+    .then(food => response.status(200).json(food));
+  }
 }
 
 module.exports = FoodsController;
