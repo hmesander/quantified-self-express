@@ -6,6 +6,8 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
+var foodsRouter = require('./routes/api/v1/foods');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
@@ -15,16 +17,18 @@ app.get('/', (request, response) => {
   response.send('Welcome to the Quantified Self - Express API!');
 });
 
-app.get('/api/v1/foods', (request, response) => {
-  database('foods').select('id', 'name', 'calories')
-  .then((foods) => {
-    if (foods.length == 0) {
-      response.status(404).json();
-    } else {
-      response.status(200).json(foods);
-    }
-  })
-});
+app.use('/api/v1/foods', foodsRouter);
+
+// app.get('/api/v1/foods', (request, response) => {
+//   database('foods').select('id', 'name', 'calories')
+//   .then((foods) => {
+//     if (foods.length == 0) {
+//       response.status(404).json();
+//     } else {
+//       response.status(200).json(foods);
+//     }
+//   })
+// });
 
 app.get('/api/v1/foods/:id', (request, response) => {
   database('foods').where('id', request.params.id).select('id', 'name', 'calories')
