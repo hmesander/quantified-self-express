@@ -102,11 +102,32 @@ describe("API GET Food Endpoints", () => {
       .post('/api/v1/foods')
       .send({
         'food': {
-          'name': 'Pho' //calories field is not given
+          'name': 'Pho'
+          //calories field is not given
         }
       })
       .end((err, response) => {
         response.should.have.status(400);
+        done();
+      });
+    });
+  });
+
+  describe('DELETE /api/v1/foods/:id', () => {
+    it('should delete a food with given id if food exists in database', done => {
+      chai.request(server)
+      .delete('/api/v1/foods/1')
+      .end((err, response) => {
+        response.should.have.status(204);
+        done();
+      });
+    });
+
+    it('should return 404 status if food to be deleted does not exist', done => {
+      chai.request(server)
+      .delete('/api/v1/foods/100')
+      .end((err, response) => {
+        response.should.have.status(404);
         done();
       });
     });

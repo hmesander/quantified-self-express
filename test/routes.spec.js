@@ -30,22 +30,7 @@
 //   });
 // });
 //
-// describe('API Routes', () => {
-//   before((done) => {
-//     knex.migrate.latest()
-//     .then(() => done())
-//     .catch(error => {
-//       throw error;
-//     });
-//   });
-//
-//   beforeEach((done) => {
-//     knex.seed.run()
-//     .then(() => done())
-//     .catch(error => {
-//       throw error;
-//     });
-//   });
+// describe('API Routes', () =>
 //
 //   describe('DELETE /api/v1/foods/:id', () => {
 //     it('should delete a food with given id if food exists in database', done => {

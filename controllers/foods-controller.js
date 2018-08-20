@@ -37,6 +37,17 @@ class FoodsController {
     .then(food => Food.find(food[0]))
     .then(food => response.status(201).json(food[0]));
   }
+
+  static destroy(request, response, next) {
+    Food.destroy(request.params.id)
+    .then((food) => {
+      if (food) {
+        response.status(204).json();
+      } else {
+        response.status(404).json();
+      }
+    })
+  }
 }
 
 module.exports = FoodsController;

@@ -19,21 +19,6 @@ app.get('/', (request, response) => {
 
 app.use('/api/v1/foods', foodsRouter);
 
-app.delete('/api/v1/foods/:id', (request, response) => {
-  const id = request.params.id
-
-  database('foods').where('id', id).select('id')
-  .then((food) => {
-    database('foods').where('id', food[0].id).del()
-    .then(() => {
-      response.status(204).json()
-    })
-  })
-  .catch(error => {
-    response.status(404).json();
-  });
-});
-
 app.patch('/api/v1/foods/:id', (request, response) => {
   const food_info = request.body.food;
 
