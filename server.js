@@ -19,27 +19,17 @@ app.get('/', (request, response) => {
 
 app.use('/api/v1/foods', foodsRouter);
 
-// app.get('/api/v1/foods', (request, response) => {
-//   database('foods').select('id', 'name', 'calories')
-//   .then((foods) => {
-//     if (foods.length == 0) {
+
+// app.get('/api/v1/foods/:id', (request, response) => {
+//   database('foods').where('id', request.params.id).select('id', 'name', 'calories')
+//   .then((food) => {
+//     if (food.length == 0) {
 //       response.status(404).json();
 //     } else {
-//       response.status(200).json(foods);
+//       response.status(200).json(food);
 //     }
 //   })
-// });
-
-app.get('/api/v1/foods/:id', (request, response) => {
-  database('foods').where('id', request.params.id).select('id', 'name', 'calories')
-  .then((food) => {
-    if (food.length == 0) {
-      response.status(404).json();
-    } else {
-      response.status(200).json(food);
-    }
-  })
-})
+// })
 
 app.post('/api/v1/foods', (request, response) => {
   const food = request.body.food;

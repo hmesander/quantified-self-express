@@ -11,6 +11,17 @@ class FoodsController {
       }
     })
   }
+
+  static show(request, response, next) {
+    let food = Food.find(request.params.id)
+    .then(food => {
+      if (food) {
+        response.status(200).json(food);
+      } else {
+        response.status(404).json();
+      }
+    });
+  }
 }
 
 module.exports = FoodsController;

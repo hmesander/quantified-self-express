@@ -4,7 +4,11 @@ const database = require('knex')(configuration);
 
 class Food {
   static all() {
-    return database("foods").select("id", "name", "calories");
+    return database('foods').select('id', 'name', 'calories');
+  }
+
+  static find(id) {
+    return database('foods').select('id', 'name', 'calories').where('id', id)
   }
 }
 
