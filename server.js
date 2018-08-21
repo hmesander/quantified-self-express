@@ -20,8 +20,6 @@ const options:cors.CorsOptions = {
   preflightContinue: false
 };
 
-router.use(cors(options));
-router.options("*", cors(options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);

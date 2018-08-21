@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const MealsController = require('../../../controllers/meals-controller');
 
+router.use(cors(options));
+router.options("*", cors(options));
+
 router.get('/', MealsController.index);
 router.get('/:id/foods', MealsController.show);
 router.post('/:meal_id/foods/:id', MealsController.create);
