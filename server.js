@@ -10,7 +10,13 @@ const database = require('knex')(configuration);
 var foodsRouter = require('./routes/api/v1/foods');
 var mealsRouter = require('./routes/api/v1/meals');
 
-app.use(cors());
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
