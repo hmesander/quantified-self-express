@@ -30,7 +30,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: process.env.DATABASE_URL,
-    }
+    },
     migrations: {
       directory: './db/migrations'
     },
