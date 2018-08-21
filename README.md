@@ -57,6 +57,8 @@ Once the server is running, visit API endpoints in your browser:
 ## Project Management
 * Project was organized and managed with Pivotal Tracker:  https://www.pivotaltracker.com/n/projects/2190612
 
+<hr>
+
 ## Deployments
 * Back end is deployed here with Heroku: https://safe-sea-21992.herokuapp.com/
 
