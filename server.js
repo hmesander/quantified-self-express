@@ -1,3 +1,6 @@
+import * as cors from "cors";
+var router = express.Router();
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,11 +12,16 @@ const database = require('knex')(configuration);
 var foodsRouter = require('./routes/api/v1/foods');
 var mealsRouter = require('./routes/api/v1/meals');
 
-app.use(function(request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+const options:cors.CorsOptions = {
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  origin: API_URL,
+  preflightContinue: false
+};
+
+router.use(cors(options));
+router.options("*", cors(options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
