@@ -11,7 +11,7 @@ class MealsController {
       } else {
         response.status(200).json(meals);
       }
-    })
+    });
   }
 
   static show(request, response, next) {
