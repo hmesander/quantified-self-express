@@ -29,7 +29,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: process.env.DATABASE_URL,
+      database: 'postgres://localhost/foods_tracker_test',
     },
     migrations: {
       directory: './db/migrations'
