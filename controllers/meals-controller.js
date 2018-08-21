@@ -11,6 +11,17 @@ class MealsController {
       }
     })
   }
+
+  static show(request, response, next) {
+    let meal = Meal.find(request.params.id)
+    .then(meal => {
+      if (meal.length == 0) {
+        response.status(404).json();
+      } else {
+        response.status(200).json(meal);
+      }
+    });
+  }
 }
 
 module.exports = MealsController;

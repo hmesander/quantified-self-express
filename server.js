@@ -21,16 +21,6 @@ app.get('/', (request, response) => {
 app.use('/api/v1/foods', foodsRouter);
 app.use('/api/v1/meals', mealsRouter);
 
-app.get('/api/v1/meals/:id/foods', (request, response) => {
-  database('meals').where('id', request.params.id).select('id', 'name')
-  .then((meal) => {
-    if (meal.length == 0) {
-      response.status(404).json();
-    } else {
-      response.status(200).json(meal);
-    }
-  })
-})
 
 app.post('/api/v1/meals/:meal_id/foods/:id', (request, response) => {
   database('meal-foods').insert({ food_id: request.params.id, meal_id: request.params.meal_id }, 'id')
