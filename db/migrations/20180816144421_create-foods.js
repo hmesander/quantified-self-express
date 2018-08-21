@@ -5,8 +5,6 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary();
       table.string('name');
       table.integer('calories');
-
-      table.timestamps(true, true);
     })
   ])
 };

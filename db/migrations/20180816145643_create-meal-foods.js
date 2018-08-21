@@ -9,8 +9,6 @@ exports.up = function(knex, Promise) {
       table.integer('meal_id')
         .references('id')
         .inTable('meals');
-
-      table.timestamps(true, true);
     })
   ])
 };
