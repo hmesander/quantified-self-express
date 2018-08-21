@@ -54,13 +54,15 @@ Once the server is running, visit API endpoints in your browser:
 
 <hr>
 
+## Project Management
+* Project was organized and managed with Pivotal Tracker:  https://www.pivotaltracker.com/n/projects/2190612
+
 ## Deployments
 * Back end is deployed here with Heroku: https://safe-sea-21992.herokuapp.com/
 
 * To see the [front end](https://github.com/hmesander/qs-frontend-starter) deployed with Surge, visit https://quantified-self-express.surge.sh/
 
 <hr>
-
 
 ## API Endpoints
 
