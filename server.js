@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Express API';
 
+app.use(cors());
 app.options('*', cors())
 
 app.get('/', (request, response) => {
