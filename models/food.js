@@ -12,7 +12,7 @@ class Food {
   }
 
   static create(name, calories) {
-    return database('foods').insert({ name: name, calories: calories }, 'id');
+    return database('foods').insert({ name: name, calories: calories, created_at: '10-01-01', updated_at: '10-01-01' }, 'id');
   }
 
   static destroy(id) {
