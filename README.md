@@ -60,9 +60,9 @@ Once the server is running, visit API endpoints in your browser:
 <hr>
 
 ## Deployments
-* Back end is deployed here with Heroku: https://safe-sea-21992.herokuapp.com/
+* Back end is deployed here with Heroku: https://mysterious-cove-99439.herokuapp.com/
 
-* To see the [front end](https://github.com/hmesander/qs-frontend-starter) deployed with Surge, visit https://quantified-self-express.surge.sh/
+* To see the [front end](https://github.com/hmesander/qs-frontend-starter) deployed with Surge, visit https://qs-be-express.surge.sh/
 
 <hr>
 
