@@ -9,6 +9,7 @@ const database = require('knex')(configuration);
 
 var foodsRouter = require('./routes/api/v1/foods');
 var mealsRouter = require('./routes/api/v1/meals');
+var favoriteFoodsRouter = require('./routes/api/v1/favorite-foods');
 
 app.use(cors());
 
@@ -26,6 +27,7 @@ app.get('/', (request, response) => {
 
 app.use('/api/v1/foods', foodsRouter);
 app.use('/api/v1/meals', mealsRouter);
+app.use('/api/v1/favorite_foods', favoriteFoodsRouter);
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
