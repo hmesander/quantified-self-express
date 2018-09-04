@@ -35,8 +35,8 @@ describe('API Food Recipe Endpoint', function() {
         response.should.be.json;
         response.body.recipes.should.be.a('array');
         response.body.recipes.length.should.equal(10);
-        response.body.recipes[0].name.should.equal('');
-        response.body.recipes[0].url.should.equal('');
+        response.body.recipes[0].name.should.equal('Fried Honey Banana');
+        response.body.recipes[0].url.should.equal('http://www.yummly.com/recipe/Fried-Honey-Banana-2379246');
         done();
       });
     });
