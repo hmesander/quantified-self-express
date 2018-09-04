@@ -36,8 +36,16 @@ describe('API Favorite Food Endpoint', () => {
         response.body[0].foods.should.be.a('array');
         response.body[0].timeseaten.should.equal('4');
         response.body[0].foods.length.should.equal(2);
+        response.body[0].foods.mealsWhenEaten.should.be.a('array');
+        response.body[0].foods.mealsWhenEaten.length.should.equal(4);
+        response.body[0].foods.mealsWhenEaten[0].should.equal('Breakfast');
+        response.body[0].foods.mealsWhenEaten[1].should.equal('Snack');
+
         response.body[1].timeseaten.should.equal('3');
         response.body[1].foods.length.should.equal(1);
+        response.body[1].foods.mealsWhenEaten.length.should.equal(3);
+        response.body[1].foods.mealsWhenEaten[2].should.equal('Lunch');
+
         response.body[2].timeseaten.should.equal('2');
         response.body[2].foods.length.should.equal(2);
         done();
