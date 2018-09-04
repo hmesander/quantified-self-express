@@ -33,10 +33,13 @@ describe('API Favorite Food Endpoint', () => {
       .end((error, response) => {
         response.should.have.status(200);
         response.should.be.json;
-        console.log(response.body[0]);
-        response.body[0].timesEaten.should.equal('3');
         response.body[0].foods.should.be.a('array');
+        response.body[0].timeseaten.should.equal('4');
         response.body[0].foods.length.should.equal(2);
+        response.body[1].timeseaten.should.equal('3');
+        response.body[1].foods.length.should.equal(1);
+        response.body[2].timeseaten.should.equal('2');
+        response.body[2].foods.length.should.equal(2);
         done();
       });
     });

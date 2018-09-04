@@ -1,4 +1,4 @@
-const environment = process.env.NODE_ENV || 'production';
+const environment = process.env.NODE_ENV || 'test';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 

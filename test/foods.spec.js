@@ -34,7 +34,7 @@ describe('API Food Endpoints', () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a('array');
-        response.body.length.should.equal(3);
+        response.body.length.should.equal(7);
         response.body[0].should.have.property('id');
         response.body[0].id.should.equal(1);
         response.body[0].should.have.property('name');
@@ -116,7 +116,7 @@ describe('API Food Endpoints', () => {
   describe('DELETE /api/v1/foods/:id', () => {
     it('should delete a food with given id if food exists in database', done => {
       chai.request(server)
-      .delete('/api/v1/foods/3')
+      .delete('/api/v1/foods/6')
       .end((err, response) => {
         response.should.have.status(204);
         done();
