@@ -1,10 +1,14 @@
-const MealFood = require('../models/meal-food');
+const MealFood = require('../models/meal-ga food');
 
 class FavoriteFoodsController {
   static index(request, response, next) {
     MealFood.favorite()
     .then(function(favorites) {
-      return response.json(favorites)
+      if(!favorites.rows) {
+        return response.sendStatus(404)
+      } else {
+        return response.json(favorites.rows)
+      }
     });
   };
 }
