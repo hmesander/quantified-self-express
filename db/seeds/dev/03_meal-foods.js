@@ -6,9 +6,6 @@ exports.seed = function(knex, Promise) {
       {meal_id: 1, food_id: 1},
       {meal_id: 1, food_id: 2},
       {meal_id: 2, food_id: 1},
-      {meal_id: 2, food_id: 2},
-      {meal_id: 2, food_id: 2},
-      {meal_id: 2, food_id: 1},
     ])
   })
   .catch(error => console.log(`Error seeding meal-foods: ${error}`))
