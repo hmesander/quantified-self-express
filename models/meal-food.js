@@ -12,15 +12,14 @@ class MealFood {
   }
 
   static favorite() {
-    return database.raw(`SELECT DISTINCT(sub.timesEaten) as timesEaten, array_agg(jsonb_build_object('name', foods.name, 'calories', foods.calories)) as foods
-                  FROM (SELECT DISTINCT COUNT(food_id) as timesEaten, food_id
+    return database.raw(`SELECT DISTINCT(sub.timesEaten) as timesEaten, array_agg(jsonb_build_object('name', foods.name, 'calories', foods.calories, 'mealsWhenEaten', sub.meals)) as foods
+                  FROM (SELECT DISTINCT COUNT(food_id) as timesEaten, food_id, array_agg(DISTINCT(meals.name)) as meals
                         FROM meal_foods, meals
                         WHERE meals.id = meal_foods.meal_id
                         GROUP BY meal_foods.food_id) sub, foods
                   WHERE foods.id = sub.food_id
                   GROUP BY sub.timesEaten
                   ORDER BY sub.timesEaten DESC;`)
-
   }
 }
 
