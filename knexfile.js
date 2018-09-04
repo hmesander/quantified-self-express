@@ -4,12 +4,12 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/foods_tracker',
+    connection: 'postgres://localhost/foods_tracker_test',
     migrations: {
       directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/dev'
+      directory: './db/seeds/test'
     },
     useNullAsDefault: true,
   },

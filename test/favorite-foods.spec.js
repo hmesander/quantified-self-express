@@ -31,10 +31,9 @@ describe('API Favorite Food Endpoint', () => {
       chai.request(server)
       .get('/api/v1/favorite_foods')
       .end((error, response) => {
-        console.log(response);
-        error.should.be.null;
         response.should.have.status(200);
         response.should.be.json;
+        console.log(response.body[0]);
         response.body[0].timesEaten.should.equal('3');
         response.body[0].foods.should.be.a('array');
         response.body[0].foods.length.should.equal(2);

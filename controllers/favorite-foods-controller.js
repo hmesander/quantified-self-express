@@ -1,4 +1,4 @@
-const MealFood = require('../models/meal-ga food');
+const MealFood = require('../models/meal-food');
 
 class FavoriteFoodsController {
   static index(request, response, next) {
